@@ -3,9 +3,10 @@ from datetime import datetime
 
 
 env.user="root"
-env.host=['47.94.137.148']
+env.hosts=['47.94.137.148']
 env.password="Xxx5211314"
 env.port=22
+
 
 def hello():
     remote_tmp_tar="/opt"
