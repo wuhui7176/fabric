@@ -19,7 +19,8 @@ def remote():
     with cd("/usr/local/project/childhealth/childhealth"):
         run("unzip -o *.war")
     run("ps -ef |grep childhealth | grep -v grep |awk '{print $2}' |xargs kill -9")
-    run("sh /usr/local/Tomcat/wechat/tomcat_wechat_childhealth/bin/startup.sh")
+    # set -m 独立进程运行
+    run("set -m;sh /usr/local/Tomcat/wechat/tomcat_wechat_childhealth/bin/startup.sh")
     run("tail -f /usr/local/Tomcat/wechat/tomcat_wechat_childhealth/logs/catalina.out")
 
 
