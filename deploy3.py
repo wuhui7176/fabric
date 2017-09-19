@@ -56,13 +56,15 @@ def cs():
     run("set -m;sh /usr/local/Tomcat/WeChat/tomcat_wechat_childhealth/bin/startup.sh")
     run("tail -f /usr/local/Tomcat/WeChat/tomcat_wechat_childhealth/logs/catalina.out")
 
-
-
 @roles('kf')
 def kf():
     with lcd(localPath+"/target"):
         put(warName, remote_path= kfPath)
     print ">>>>>>>上传至开发服务器中"
 
+@roles('cs')
+def sz():
+    with lcd(localPath+"/target"):
+        get(remote_path="/usr/local/project/socket/socketfast/socketfast/yyxk-socket-fast-0.0.1-SNAPSHOT.war")
 
 
