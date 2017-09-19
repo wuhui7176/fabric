@@ -32,3 +32,4 @@ def package():
         local("scp yyxk-web-childhealth-0.0.1-SNAPSHOT.war dev@172.17.0.10:/usr/local/project/childhealth/childhealth")
     local("ls -a")
 
+print "wuhuihuihdasiuhduiasdas"
