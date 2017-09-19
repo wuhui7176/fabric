@@ -23,7 +23,7 @@ def remote():
     run("set -m;sh /usr/local/Tomcat/wechat/tomcat_wechat_childhealth/bin/startup.sh")
     run("tail -f /usr/local/Tomcat/wechat/tomcat_wechat_childhealth/logs/catalina.out")
 
-
+111
 def package():
     #进入某个文件夹下工作
     with lcd("/Users/xiaofengche/IdeaProjects/yyxk-web-front/yyxk-web-childhealth"):
