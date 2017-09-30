@@ -38,9 +38,12 @@ def package():
 
 @roles('tc')
 def tc():
+    with lcd(localPath+"/target"):
     #进入远程服务器进行工作
+        put(warName, remote_path=projectPath)
     with cd(projectPath):
         run(unzip)
+
     run(killChild)
     # set -m 独立进程运行
     run("set -m;sh /usr/local/Tomcat/wechat/tomcat_wechat_childhealth/bin/startup.sh")
@@ -66,5 +69,22 @@ def kf():
 def sz():
     with lcd(localPath+"/target"):
         get(remote_path="/usr/local/project/socket/socketfast/socketfast/yyxk-socket-fast-0.0.1-SNAPSHOT.war")
+
+
+def xiaxian():
+    with cd(""):
+        f=open("nginx.conf","r+")
+        line = f.readlines()
+        f.seek(0, 0)
+        for l in line:
+            p = l.replace("中文", "英文")
+            f.write(p)
+            print p
+        f.close()
+        run("nginx -s reload")
+        print "服务器下线成功"
+
+def shangxian():
+    print "服务器上线成功"
 
 

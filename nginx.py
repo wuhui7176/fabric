@@ -6,11 +6,16 @@
 #w+     以读写模式打开 (参见 w )w+  覆盖写，删除原文件中的内容
 #a+     以读写模式打开 (参见 a )  追加到后面
 
+f = open("nginx.conf","r+")
 
-import os
+line = f.readlines()
 
-os.system("ls -a")
-f = open("t.txt","a+")
-f.write("asdasa")
+#将文件的读写指针🈯️指向 0 0
+f.seek(0,0)
 
-print f.readline()
+for l in  line:
+    p=l.replace("中文","英文")
+    f.write(p)
+    print p
+
+f.close()
