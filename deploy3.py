@@ -21,13 +21,19 @@ unzip="unzip -o *.war"
 env.roledefs ={
     'cs':['dev@192.168.2.102:22'],
     'tc':['dev@172.17.0.10:22'],
-    'kf':['dev@192.168.2.11:22']
+    'kf':['dev@192.168.2.11:22'],
+    'xg':['root@47.90.127.54']
 }
 
 #入口函数
 def m(name):
     #用这个命令执行操作 excute
     execute(name)
+
+@roles('xg')
+def geta():
+    with cd("/opt"):
+        get("KindleForMac-47032.dmg")
 
 @runs_once
 def package():
@@ -49,9 +55,20 @@ def tc():
     run("set -m;sh /usr/local/Tomcat/wechat/tomcat_wechat_childhealth/bin/startup.sh")
     run("tail -f /usr/local/Tomcat/wechat/tomcat_wechat_childhealth/logs/catalina.out")
 
+@roles('tc')
+def tctf():
+    run("tail -f /usr/local/Tomcat/wechat/tomcat_wechat_childhealth/logs/catalina.out")
+
+
+@roles('tc')
+def cstf():
+    run("tail -f /usr/local/Tomcat/WeChat/tomcat_wechat_childhealth/logs/catalina.out")
+
 @roles('cs')
 def cs():
     #进入远程服务器进行工作
+    with lcd(localPath+"/target"):
+        put(warName, remote_path=projectPath)
     with cd(projectPath):
         run(unzip)
     run(killChild)
@@ -62,8 +79,9 @@ def cs():
 @roles('kf')
 def kf():
     with lcd(localPath+"/target"):
-        put(warName, remote_path= kfPath)
+        put(warName, remote_path= kfPath,use_sudo=True)
     print ">>>>>>>上传至开发服务器中"
+
 
 @roles('cs')
 def sz():
